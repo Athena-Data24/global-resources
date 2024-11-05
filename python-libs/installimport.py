@@ -12,17 +12,18 @@ def install_and_import(packages):
         try:
             # Try importing the package
             globals()[alias] = importlib.import_module(package)
+            print(f"{package} imported successfully as {alias}.")
         except ImportError:
-            print(f"Installing {package}...")
+            print(f"{package} not found. Installing {package}...")
             subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-            # Import the package after installation
+            # Try importing the package after installation
             globals()[alias] = importlib.import_module(package)
+            print(f"{package} installed and imported successfully as {alias}.")
         else:
             print(f"{package} is already installed.")
 
-"""
-# List of packages with aliases
-required_packages = {
+# List of packages with aliases (declared outside the function)
+"""required_packages = {
     'pandas': 'pd',
     'numpy': 'np',
     'ydata_profiling': 'ydata_profiling',
@@ -33,17 +34,17 @@ required_packages = {
     'hashlib': 'hashlib',
     'catboost': 'catboost',
     'lightgbm': 'lgb'
-}
-"""
+}"""
 
 required_packages = {
     'pandas': 'pd',
-    'numpy': 'np'
-}
+    'numpy': 'np'}
 
-# Run the function
+# Run the function with the required packages
 install_and_import(required_packages)
 
-# Example usage
-print(np.__version__)  # Checking if numpy was imported successfully as np
-print(pd.__version__)  # Checking if pandas was imported successfully as pd
+# Example usage: Checking if numpy was imported successfully as np
+try:
+    print(np.__version__)  # This will print the version of numpy if it was successfully imported
+except NameError:
+    print("numpy was not imported successfully.")
