@@ -20,6 +20,7 @@ def install_and_import(packages):
         else:
             print(f"{package} is already installed.")
 
+"""
 # List of packages with aliases
 required_packages = {
     'pandas': 'pd',
@@ -33,9 +34,16 @@ required_packages = {
     'catboost': 'catboost',
     'lightgbm': 'lgb'
 }
+"""
+
+required_packages = {
+    'pandas': 'pd',
+    'numpy': 'np'
+}
 
 # Run the function
 install_and_import(required_packages)
 
 # Example usage
 print(np.__version__)  # Checking if numpy was imported successfully as np
+print(pd.__version__)  # Checking if pandas was imported successfully as pd
