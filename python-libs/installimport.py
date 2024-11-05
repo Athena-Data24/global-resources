@@ -13,6 +13,8 @@ def install_and_import(packages):
         except ImportError:
             print(f"Installing {package}...")
             subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+            # Re-import the package after installation
+            globals()[package] = __import__(package)
         else:
             print(f"{package} is already installed.")
 
